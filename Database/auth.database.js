@@ -3,7 +3,7 @@ const SUPABASE_ANON_KEY = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const createNewUser = async (userData) => {
+export const createNewUser = async (userData) => {
     const { data, error } = await supabaseClient.auth.signUp(
         userData
         // {
@@ -27,7 +27,7 @@ const createNewUser = async (userData) => {
 
 };
 
-const signInUser = async (userData) => {
+export const signInUser = async (userData) => {
     const { data, error } = await supabaseClient.auth.signInWithPassword(
         //     {
         //     email: 'example@email.com',
@@ -45,7 +45,7 @@ const signInUser = async (userData) => {
 
 }
 
-const signOutUser = async () => {
+export const signOutUser = async () => {
     const { error } = await supabaseClient.auth.signOut()
 
     if (error) {
@@ -54,7 +54,7 @@ const signOutUser = async () => {
     }
 }
 
-const getUserSession = async () => {
+export const getUserSession = async () => {
     const { data, error } = await supabaseClient.auth.getSession()
 
     if (error) {
@@ -66,8 +66,8 @@ const getUserSession = async () => {
 
 }
 
-const getLoggedInUser = async () => {
-    
+export const getLoggedInUser = async () => {
+
     const { data: { user } } = await supabaseClient.auth.getUser()
 
     console.log(user);

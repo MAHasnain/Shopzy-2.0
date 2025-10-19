@@ -6,7 +6,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // console.log(supabase);
 // console.log(supabaseClient);
 
-const getAllProducts = async () => {
+export const getAllProducts = async () => {
 
     const { data, error } = await supabaseClient
         .from('Products')
@@ -22,8 +22,8 @@ const getAllProducts = async () => {
 
 }
 
-const getProductById = async (id) => {
-     const { data, error } = await supabaseClient
+export const getProductById = async (id) => {
+    const { data, error } = await supabaseClient
         .from("Products")
         .select("*")
         .eq('id', id)

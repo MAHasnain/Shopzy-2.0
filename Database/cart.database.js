@@ -3,7 +3,7 @@ const SUPABASE_ANON_KEY = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const addProductInCart = async (product) => {
+export const addProductInCart = async (product) => {
     const { data, error } = await supabaseClient
         .from('Cart')
         .insert(product)
@@ -17,7 +17,7 @@ const addProductInCart = async (product) => {
     return data;
 }
 
-const editProductInCart = async (productData, productId) => {
+export const editProductInCart = async (productData, productId) => {
     const { error } = await supabaseClient
         .from('Cart')
         .update(productData)
@@ -31,7 +31,7 @@ const editProductInCart = async (productData, productId) => {
 
 }
 
-const removeProductById = async (productId) => {
+export const removeProductById = async (productId) => {
     const { data, error } = await supabaseClient
         .from('Cart')
         .delete()
@@ -45,7 +45,7 @@ const removeProductById = async (productId) => {
     return data;
 }
 
-const removeMultipleProducts = async (productIdsArray) => {
+export const removeMultipleProducts = async (productIdsArray) => {
     const response = await supabaseClient
         .from('Cart')
         .delete()
