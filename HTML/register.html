@@ -16,9 +16,30 @@
         <nav></nav>
     </header>
 
-    <section>
-        <div class="container">
-            
+    <section class="container register_container">
+        <div class="heading">
+            <h3>Step Into Shopzy</h3>
+            <p>Create your account and unlock the vibe.</p>
+        </div>
+        <div class="register-form">
+            <form action="">
+                <div class="form-inputs">
+                    <label for="email" class="emailLabel">Email</label>
+                    <input type="email" name="Email" id="regEmailInp" required>
+                    <label for="username" class="usernameLabel">Username</label>
+                    <input type="text" name="username" id="regUsernameInp" required>
+                    <label for="role" class="roleLabel">Role</label>
+                    <input type="text" value="ADMIN" name="role" id="regRoleInp" readonly>
+                    <label for="password" class="passwordLabel">Password</label>
+                    <input type="password" name="password" id="regPasswordInp" required>
+                </div>
+                <button type="submit" id="register-btn">Register</button>
+            </form>
+        </div>
+        <div class="">
+            <p>Already have an account?
+                <a href="./login.html">Login</a>
+            </p>
         </div>
     </section>
 

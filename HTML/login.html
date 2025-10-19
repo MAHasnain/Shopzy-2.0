@@ -17,8 +17,30 @@
     </header>
 
     <section>
-        <div class="container">
-            
+        <div class="container login_container">
+            <div class="heading">
+                <h3>
+                    Welcome Back to ShopZy
+                </h3>
+                <p>Log in to track your orders, manage your wishlist, and get personalized offers.</p>
+            </div>
+
+            <div class="login-form">
+                <form action="">
+                    <div class="form-inputs">
+                        <label for="email">Email</label>
+                        <input placeholder="Enter your email address" type="email" name="email" id="loginEmailInp"
+                            required>
+                        <label for="password">Password</label>
+                        <input placeholder="Enter your password" type="password" name="password" id="loginPassInp"
+                            required>
+                    </div>
+                    <button type="submit" id="loginBtn">Login</button>
+                </form>
+            </div>
+            <div class="registerBtn">
+                <p>Don’t have an account? <a href="../HTML/register.html">Register Now</a></p>
+            </div>
         </div>
     </section>
 
@@ -34,7 +56,7 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <script type="module" src="../JS/cart.js"></script>
+    <script type="module" src="../JS/login.js"></script>
 </body>
 
 </html>
