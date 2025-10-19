@@ -24,12 +24,14 @@
         <div class="register-form">
             <form action="">
                 <div class="form-inputs">
+                    <label for="name" class="nameLabel">Name</label>
+                    <input type="text" name="name" id="regNameInp" >
+                    <label for="age" class="ageLabel">Age</label>
+                    <input type="number" name="age" id="regAgeInp" >
                     <label for="email" class="emailLabel">Email</label>
                     <input type="email" name="Email" id="regEmailInp" required>
-                    <label for="username" class="usernameLabel">Username</label>
-                    <input type="text" name="username" id="regUsernameInp" required>
-                    <label for="role" class="roleLabel">Role</label>
-                    <input type="text" value="ADMIN" name="role" id="regRoleInp" readonly>
+                    <!-- <label for="role" class="roleLabel">Role</label>
+                    <input type="text" value="USER" name="role" id="regRoleInp" readonly> -->
                     <label for="password" class="passwordLabel">Password</label>
                     <input type="password" name="password" id="regPasswordInp" required>
                 </div>
