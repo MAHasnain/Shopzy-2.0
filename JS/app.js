@@ -4,6 +4,7 @@
 import { getAllCategories, getAllProducts } from "../Database/allMethods.js";
 
 const productsContainer = document.querySelector(".products_container")
+const categoriesContainer = document.querySelector(".categories")
 document.addEventListener("DOMContentLoaded", async () => {
     const allProducts = await getAllProducts();
     console.log(allProducts);
@@ -31,4 +32,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const allCategories = await getAllCategories();
     console.log(allCategories);
+    allCategories.map(category => {
+        categoriesContainer.innerHTML += `                <div data-id="${category.id}" class="category-card">
+            <p>${category.name}</p>
+        </div>
+        `
+    })
+
+    const categoryCards = document.querySelectorAll(".category-card");
+    categoryCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const cardId = card.getAttribute("data-id");
+             window.location.href = `../HTML/category_details.html?id=${cardId}`
+        })
+    })
+
 })
