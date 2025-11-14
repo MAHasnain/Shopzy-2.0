@@ -1,7 +1,20 @@
-const SUPABASE_URL = `SUPABASE_URL`;
-const SUPABASE_ANON_KEY = `SUPABASE_ANON_KEY`;
+const SUPABASE_URL = `https://ufeiacuottjvkuezhyue.supabase.co`;
+const SUPABASE_ANON_KEY = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmZWlhY3VvdHRqdmt1ZXpoeXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2MTQ3MDgsImV4cCI6MjA3NjE5MDcwOH0.3nRXCTj84tAReLv6w9c0QIDCzuYphEo64F3tQn0BQ30`;
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+export const getCartItems = async () => {
+    const { data, error } = await supabaseClient
+        .from('Cart')
+        .select("*")
+
+    if (error) {
+        console.error(error);
+        return error;
+    }
+    console.log(data);
+    return data;
+}
 
 export const addProductInCart = async (product) => {
     const { data, error } = await supabaseClient
