@@ -1,0 +1,148 @@
+   /* LAYOUT.CSS
+   (Header, Footer, Grid System, Section Spacing) */
+
+
+/* Global Layout */
+header,
+footer,
+section {
+  width: 100%;
+  position: relative;
+}
+
+/* 🧭 Header / Navbar */
+header {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.navbar ul li a:hover {
+  color: var(--primary-color);
+}
+
+/* 📱 Responsive Navbar */
+.menu-toggle {
+  display: none;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    background: var(--card-bg);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+  }
+
+  .navbar ul.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* 🧩 Grid System */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 🧱 Section Spacing */
+.section {
+  padding: 4rem 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+/* 🦶 Footer */
+footer {
+  background: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+footer a:hover {
+  color: var(--accent-color);
+}
