@@ -1,6 +1,22 @@
 import { addProductInCart, getProductById, getUserSession } from "../Database/allMethods.js";
 
 const productContainer = document.querySelector(".product-container");
+function showCartModal(message) {
+    const modal = document.querySelector("#cartModal");
+    const content = document.querySelector("#cartModalContent");
+
+    content.innerHTML = `
+        <h2>${message}</h2>
+        <button class="btn" id="closeCartModal">Okay</button>`;
+
+    modal.classList.add("active");
+
+    document.querySelector("#closeCartModal").addEventListener("click", () => {
+        modal.classList.remove("active");
+        // window.location.href = `../HTML/cart.html`;
+    });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const productId = searchParams.get('id');
@@ -12,17 +28,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         document.querySelector("#product-name").textContent = product.title
         document.querySelector("#product-img").src = product.image_url
-        document.querySelector("#product-price").textContent = product.price
+        document.querySelector("#product-price").textContent = `Rs. ${product.price}`
         document.querySelector("#product-description").textContent = product.description
 
         // ITEM QUANTITY INPUTS SECTION
         document.querySelector(".action-btns-section").innerHTML = `
             <div id="change-Quantity">
-            <button class="qtyInc">+</button>
             <input type="number" value=1 min=1 class="qtyInp" readonly>
-            <button class="qtyDec">-</button>
+            <button class="btn qtyInc">+</button>
+            <button class="btn qtyDec">-</button>
             </div>
-            <button class="cartBtn">Add to Cart</button>`;
+            <div class="buy-btns"><button class="btn cartBtn">Add to Cart</button><button class="btn buyBtn">Buy Now</button></div>`;
 
         // Quantity update section
         const productQty = document.querySelector(".qtyInp");
@@ -46,14 +62,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             const cartBtn = document.querySelector(".cartBtn");
             cartBtn.addEventListener("click", async (e) => {
                 e.preventDefault();
-                const user = JSON.parse(localStorage.getItem("user"));
-                console.log(user.id);
+                const userId = userSession.session?.user?.id;
+                console.log(userId);
                 const addedProduct = await addProductInCart({
-                    user_id: user.id,
+                    user_id: userId,
                     product_id: productId,
                     quantity: productQty.value,
                 })
                 console.log(addedProduct);
+                if (addedProduct) {
+                    showCartModal("Item added to your cart!");
+                } else {
+                    return
+                }
+            })
+
+            const buyBtn = document.querySelector(".buyBtn");
+            buyBtn.addEventListener("click", () => {
+                window.location.href = `../HTML/checkout.html?product=${productId}`
             })
 
         } else {
