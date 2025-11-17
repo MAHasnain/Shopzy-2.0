@@ -5,6 +5,23 @@ const cartItemsSection = document.querySelector(".cart-items-section");
 const checkoutBtnSection = document.querySelector(".checkout-section");
 const deleteBtnSection = document.querySelector(".delete-btn-section");
 
+function showCartModal(message) {
+    const modal = document.querySelector("#cartModal");
+    const content = document.querySelector("#cartModalContent");
+
+    content.innerHTML = `
+        <h2>${message}</h2>
+        <button class="btn" id="closeCartModal">Okay</button>
+    `;
+
+    modal.classList.add("active");
+
+    document.querySelector("#closeCartModal").addEventListener("click", () => {
+        modal.classList.remove("active");
+        window.location.reload();
+    });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const userSession = await getUserSession();
@@ -18,7 +35,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 cartItemsSection.innerHTML = `<div>
                     <p>No items here yet</p>
                     <p>Find products you’ll love below</p>
-                    <button> <a href="../index.html">Explore shop</a> </button></div>`
+                    <button class="btn"> <a href="../index.html">Explore shop</a> </button></div>`
+                    
             } else {
 
                 // cart items section
@@ -28,13 +46,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const product = await getProductById(product_id)
                     // console.log(product);
                     cartItemsSection.innerHTML += `
-                    <div class="cart-item flex" data-itemId="${product_id}">
-                    <img src="${product.image_url}"  width="70px" alt="${product.title}">
+                    <div class="cart-item " data-itemId="${product_id}">
+                    <img src="${product.image_url}"  width="100px" alt="${product.title}">
                     <p class="item-name">${product.title}</p>
                     <p class="item-price">${product.price}</p>
                     <p class="item-qty">${quantity}</p>
-                    <button class="deleteBtn"><i class="fa-solid fa-trash"></i></button>
-                    </div>`;
+                    <div><button class="btn deleteBtn"><i class="fa-solid fa-trash"></i></button>
+                    </div></div>`;
 
                     const deleteBtn = document.querySelectorAll(".deleteBtn");
                     // console.log(deleteBtn);
@@ -66,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <p class="item-total-price"><span>Total </span>${totalPrice}</p>
                     </div>
                     <div class="checkout-btn">
-                    <a href="../HTML/checkout.html">Proceed to Checkout</a>
+                    <a class="btn" href="../HTML/checkout.html">Proceed to Checkout</a>
                     </div>
                     </div>`;
                 })
@@ -74,8 +92,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // delete button section
 
                 deleteBtnSection.innerHTML = `
-                <div class="btn">
-                        <button class="deleteBtn"><i class="fa-solid fa-trash"></i></button>
+                <div class="">
+                        <button class="btn deleteBtn"><i class="fa-solid fa-trash"></i></button>
                     </div>`;
 
                 const deleteBtn = document.querySelector(".deleteBtn");
@@ -88,7 +106,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                     const deletedProducts = await removeMultipleProducts(itemIds);
                     // console.log(deletedProducts);
-
+                    showCartModal("Items removed from your cart!");
+                    
                 })
 
             }

@@ -88,3 +88,11 @@ p {
 .shadow {
   box-shadow: var(--shadow);
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: white;
+}
