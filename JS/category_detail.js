@@ -1,5 +1,9 @@
 import { addProductInCart, getAllProducts, getCategoryById } from "../Database/allMethods.js";
 
+function shortText(text, limit = 30) {
+    return text.length > limit ? text.slice(0, limit) + "..." : text;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const categoryName = document.querySelector(".category-name")
@@ -30,19 +34,32 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="product-price"><h4>Rs. ${product.price}</h4></div>
                     <div class="product-name"><p>${product.title}</p></div>
                     <div class="product-description"><p>${product.description}</p></div>
-                    <div class="product-stock"><p>${product.stock}</p></div>
+                    <div class="product-stock"><p>Stock ${product.stock}</p></div>
                     
-                    <button id="cart_btn">Add to Cart</button>
+                    <button class="btn" id="cart_btn">Add to Cart</button>
                 </div>`
 
-                const cart_btn = document.querySelector("#cart_btn");
-                cart_btn.addEventListener("click", async (e) => {
-                    e.preventDefault();
-                    
-                    const addProduct = await addProductInCart(product.id)
-                    console.log(addProduct);
+                const descEl = document.querySelectorAll(".product-description");
+                descEl.forEach(el => {
+                    el.textContent = shortText(el.textContent, 40);
                 });
+
+                // const cart_btn = document.querySelector("#cart_btn");
+                // cart_btn.addEventListener("click", async (e) => {
+                //     e.preventDefault();
+
+                //     const addProduct = await addProductInCart(product.id)
+                //     console.log(addProduct);
+                // });
             })
+
+        const productCards = document.querySelectorAll(".product-card");
+        productCards.forEach(card => {
+            card.addEventListener("click", () => {
+                const cardId = card.getAttribute("data-id");
+                window.location.href = `../HTML/product_details.html?id=${cardId}`;
+            })
+        });
 
     }
 
