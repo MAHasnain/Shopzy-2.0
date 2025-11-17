@@ -9,10 +9,8 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  background: linear-gradient(
-      rgba(15, 15, 15, 0.7),
-      rgba(15, 15, 15, 0.8)
-    ),
+  background: linear-gradient(rgba(15, 15, 15, 0.7),
+      rgba(15, 15, 15, 0.8)),
     url('../images/hero-bg.jpg') center/cover no-repeat;
   color: var(--text-color);
 }
@@ -48,6 +46,7 @@
   box-shadow: var(--shadow);
   transition: var(--transition);
   border: 1px solid var(--border-color);
+  cursor: pointer;
 }
 
 .product-card:hover {
@@ -112,6 +111,26 @@
 /* 🛒 Cart Page */
 .cart {
   padding: 4rem 0;
+}
+
+.items-section {
+  padding: 20px;
+}
+
+.cart-items-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  min-height: 70vh;
+  text-align: center;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cart table {
