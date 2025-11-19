@@ -1,16 +1,42 @@
 // console.log(getAllProducts);
 // console.log(supabase);
 
-import { getAllCategories, getAllProducts } from "../Database/allMethods.js";
+import { getAllCategories, getAllProducts, getUserSession, signOutUser } from "../Database/allMethods.js";
 
-const productsContainer = document.querySelector(".products_container")
-const categoriesContainer = document.querySelector(".categories")
+const productsContainer = document.querySelector(".products_container");
+const categoriesContainer = document.querySelector(".categories");
+const authBtnsSection = document.querySelector(".auth-btns-section")
 
 function shortText(text, limit = 30) {
     return text.length > limit ? text.slice(0, limit) + "..." : text;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const userSession = await getUserSession();
+    console.log(userSession);
+
+    if (userSession.session) {
+        authBtnsSection.innerHTML = `<button class="btn logout-btn">Logout</button>`;
+
+        const logoutBtn = document.querySelector(".logout-btn");
+        logoutBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            console.log("clicked");
+            const user = await signOutUser();
+            console.log(user);
+            window.location.href = `../HTML/login.html`;
+        })
+
+    } else {
+        authBtnsSection.innerHTML = `
+        <div class="">
+            <button class="btn login-btn"><a href="./HTML/login.html">Login</a></button>
+            <button class="btn signup-btn"><a href="./HTML/register.html">Signup</a></button>
+        </div>`
+    
+    }
+
     const allProducts = await getAllProducts();
     console.log(allProducts);
 

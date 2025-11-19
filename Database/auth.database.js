@@ -47,12 +47,14 @@ export const signInUser = async (userData) => {
 }
 
 export const signOutUser = async () => {
-    const { error } = await supabaseClient.auth.signOut()
+    const { data, error } = await supabaseClient.auth.signOut()
 
     if (error) {
         console.error(error);
         return error
     }
+    console.log(data);
+    return data;
 }
 
 export const getUserSession = async () => {
