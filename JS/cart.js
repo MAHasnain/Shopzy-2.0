@@ -4,6 +4,7 @@ import { getCartItems, getUserSession, getProductById, removeProductById, remove
 const cartItemsSection = document.querySelector(".cart-items-section");
 const checkoutBtnSection = document.querySelector(".checkout-section");
 const deleteBtnSection = document.querySelector(".delete-btn-section");
+const authBtnSection = document.querySelector(".authBtnSection");
 
 function showCartModal(message) {
     const modal = document.querySelector("#cartModal");
@@ -27,6 +28,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         const userSession = await getUserSession();
 
         if (userSession.session) {
+            authBtnSection.innerHTML = `<button class="btn logout-btn">Logout</button>`;
+
+            const logoutBtn = document.querySelector(".logout-btn");
+            logoutBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                console.log("clicked");
+                const user = await signOutUser();
+                console.log(user);
+                window.location.href = `../HTML/login.html`;
+            })
 
             const cartItems = await getCartItems();
             console.log(cartItems);
@@ -36,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <p>No items here yet</p>
                     <p>Find products you’ll love below</p>
                     <button class="btn"> <a href="../index.html">Explore shop</a> </button></div>`
-                    
+
             } else {
 
                 // cart items section
@@ -48,9 +59,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     cartItemsSection.innerHTML += `
                     <div class="cart-item " data-itemId="${product_id}">
                     <img src="${product.image_url}"  width="100px" alt="${product.title}">
-                    <p class="item-name">${product.title}</p>
-                    <p class="item-price">${product.price}</p>
-                    <p class="item-qty">${quantity}</p>
+                    <div class="product-header">
+                        <h4 class="item-name">${product.title}</h4>
+                        <h5 class="item-price">Rs. ${product.price}</h5>
+                    </div>
+                    <p class="item-qty">Qty: ${quantity}</p>
                     <div><button class="btn deleteBtn"><i class="fa-solid fa-trash"></i></button>
                     </div></div>`;
 
@@ -107,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const deletedProducts = await removeMultipleProducts(itemIds);
                     // console.log(deletedProducts);
                     showCartModal("Items removed from your cart!");
-                    
+
                 })
 
             }

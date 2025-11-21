@@ -113,15 +113,21 @@
   padding: 4rem 0;
 }
 
+.delete-btn-section {
+  text-align: end;
+  
+}
+
 .items-section {
+  
   padding: 20px;
 }
 
 .cart-items-section {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 15px;
   min-height: 70vh;
   text-align: center;
@@ -131,6 +137,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 30px;
+}
+
+.product-header {
+  text-align: start;
+  width: 40vw;
 }
 
 .cart table {
